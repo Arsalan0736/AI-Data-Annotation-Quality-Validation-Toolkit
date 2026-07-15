@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 import zipfile
+import time
 import pandas as pd
 from PIL import Image as PILImage
 from config import IMAGES_DIR, TEXT_DIR
@@ -11,6 +12,26 @@ def render(project):
     
     if project is None:
         st.warning("⚠️ Please select or create a project in the sidebar before uploading.")
+        
+        st.markdown("### 🤖 Demo Sandbox Bootstrapper")
+        st.write("""
+        If you are testing this app on Streamlit Cloud or want to explore the toolkit's features immediately, 
+        you can seed a sample dataset containing pre-configured image and text classification projects.
+        """)
+        
+        if st.button("🚀 Initialize with Demo Sandbox Dataset", use_container_width=True):
+            with st.spinner("Bootstrapping database and generating sample assets..."):
+                try:
+                    import create_sample_data
+                    create_sample_data.generate_sample_images()
+                    create_sample_data.generate_sample_texts()
+                    create_sample_data.bootstrap_database()
+                    
+                    st.success("Demo dataset bootstrapped successfully! Refreshing page...")
+                    time.sleep(1)
+                    st.rerun()
+                except Exception as e:
+                    st.error(f"Failed to bootstrap demo: {e}")
         return
 
     st.write(f"Add data items to project: **{project['name']}** (Type: **{project['type']}**)")
