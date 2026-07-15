@@ -1,0 +1,32 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environments
+venv/
+ENV/
+env/
+.env
+
+# SQLite Databases & Local Storage
+*.db
+*.sqlite
+toolkit.db
+
+# Dataset uploads & exported artifacts
+data/
+outputs/
+reports/
+
+# OS-specific files
+.DS_Store
+.DS_Store?
+ehthumbs.db
+Thumbs.db
+
+# Pytest / Test Cache
+.pytest_cache/
+.coverage
+htmlcov/
